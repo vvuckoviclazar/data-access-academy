@@ -7,14 +7,16 @@
   </head>
   <body>
     <script>
-      var myXmlString = `<root><message>Hello World!</message></root>`;
-      var domParser = new DOMParser();
-      var xmlDom = domParser.parseFromString(myXmlString, "text/xml");
+      var xmlDocument = document.implementation.createDocument(null, "root");
 
-      var messageElement = xmlDom.getElementsByTagName("message")[0];
-      var messageText = messageElement.childNodes[0];
+      var ingredient1Element = xmlDocument.createElement("ingredient");
+      var ingredient1ElementText = xmlDocument.createTextNode("bread slice");
+      ingredient1Element.appendChild(ingredient1ElementText);
 
-      console.log(messageText.nodeValue);
+      xmlDocument.documentElement.appendChild(ingredient1Element);
+
+      var xmlSerializer = new XMLSerializer();
+      var xmlString = xmlSerializer.serializeToString(xmlDocument);
     </script>
   </body>
 </html>
