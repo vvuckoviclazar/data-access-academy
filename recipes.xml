@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<recipe>
+ <title>Grilled Cheese Sandwich</title>
+  <ingredients>
+     <ingredient qty="2">bread slice</ingredient>
+     <ingredient>cheese slice</ingredient>
+     <ingredient qty="2">margarine pat</ingredient>
+  </ingredients>
+</recipe>
