@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XML and JavaScript</title>
+  </head>
+  <body>
+    <script>
+      var myXmlString = `<root><message>Hello World!</message></root>`;
+      var domParser = new DOMParser();
+      var xmlDom = domParser.parseFromString(myXmlString, "text/xml");
+
+      var messageElement = xmlDom.getElementsByTagName("message")[0];
+      var messageText = messageElement.childNodes[0];
+
+      console.log(messageText.nodeValue);
+    </script>
+  </body>
+</html>
