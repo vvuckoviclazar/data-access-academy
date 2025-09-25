@@ -3,15 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JSON Parse</title>
+    <title>JSON parse example - countries</title>
   </head>
   <body>
     <script>
-      var json = '{"name": "Ben", "age": 44}';
+      var json = `{
+      "countries": [
+          {
+             "countryCode": "sr",
+             "name": "Serbia",
+             "capital": "Belgrade",
+             "description": "Serbia is....."
+          },
+          {
+             "countryCode": "fr",
+             "name": "France",
+             "capital": "Paris",
+             "description": "France is....."
+              }
+      ]
+}`;
 
-      var obj = JSON.parse(json);
+      var data = JSON.parse(json);
 
-      console.log(obj.name);
+      for (let i = 0; i < data.countries.length; i++) {
+        document.body.innerHTML += `<h2>` + data.countries[i].name + "</h2>";
+        document.body.innerHTML +=
+          "<p>Capital:" + data.countries[i].capital + "</p>";
+        document.body.innerHTML +=
+          "<p>Description:" + data.countries[i].description + "</p>";
+      }
     </script>
   </body>
 </html>
