@@ -3,36 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JSON parse example - countries</title>
+    <title>JSON Serializer</title>
   </head>
   <body>
     <script>
-      var json = `{
-      "countries": [
-          {
-             "countryCode": "sr",
-             "name": "Serbia",
-             "capital": "Belgrade",
-             "description": "Serbia is....."
-          },
-          {
-             "countryCode": "fr",
-             "name": "France",
-             "capital": "Paris",
-             "description": "France is....."
-              }
-      ]
-}`;
+      var person = {};
+      person.id = 34;
+      person.firstName = "Ben";
+      person.lastName = "Lord";
+      person.address = {};
+      person.address.street = "Bos En Lommerweg 65";
+      person.address.zipCode = "1008 AG";
+      person.address.city = "Amsterdam";
+      person.adult = true;
 
-      var data = JSON.parse(json);
+      person.showInfo = function () {
+        return firstName + " " + lastName;
+      };
 
-      for (let i = 0; i < data.countries.length; i++) {
-        document.body.innerHTML += `<h2>` + data.countries[i].name + "</h2>";
-        document.body.innerHTML +=
-          "<p>Capital:" + data.countries[i].capital + "</p>";
-        document.body.innerHTML +=
-          "<p>Description:" + data.countries[i].description + "</p>";
+      function replacer(key, value) {
+        if (key === "id") {
+          return undefined;
+        } else if (key === "adult") {
+          return value === true ? "yes" : "no";
+        }
+
+        return value;
       }
+
+      var json = JSON.stringify(person, replacer);
+
+      console.log(json);
     </script>
   </body>
 </html>
