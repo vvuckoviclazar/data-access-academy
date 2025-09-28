@@ -3,37 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JSON Serializer</title>
+    <title>Ajax - Requesting data</title>
   </head>
   <body>
     <script>
-      var person = {};
-      person.id = 34;
-      person.firstName = "Ben";
-      person.lastName = "Lord";
-      person.address = {};
-      person.address.street = "Bos En Lommerweg 65";
-      person.address.zipCode = "1008 AG";
-      person.address.city = "Amsterdam";
-      person.adult = true;
+      let xhr = new XMLHttpRequest();
+      xhr.open("GET", "countries.json");
+      xhr.responseType = "json";
+      xhr.send();
 
-      person.showInfo = function () {
-        return firstName + " " + lastName;
+      xhr.onload = function () {
+        let countries = xhr.response;
+
+        for (let i = 0; i < countries.length; i++) {
+          document.body.innerHTML += "<h2>" + countries[i].name + "</h2>";
+          document.body.innerHTML +=
+            "<p>Country code: " + countries[i].countryCode + "</p>";
+          document.body.innerHTML +=
+            "<p>Capital: " + countries[i].capital + "</p>";
+          document.body.innerHTML +=
+            "<p>Description: " + countries[i].description + "</p>";
+        }
       };
 
-      function replacer(key, value) {
-        if (key === "id") {
-          return undefined;
-        } else if (key === "adult") {
-          return value === true ? "yes" : "no";
-        }
+      xhr.onerror = function () {
+        console.log("Network Error");
+      };
 
-        return value;
-      }
-
-      var json = JSON.stringify(person, replacer);
-
-      console.log(json);
+      xhr.onprogress = function (event) {
+        console.log("Received " + event.loaded + " of " + event.total);
+      };
     </script>
   </body>
 </html>
